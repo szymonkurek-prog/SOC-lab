@@ -7,7 +7,7 @@ This environment is designed to simulate a basic SOC with endpoints, an attacker
 
 - **Laptop (Windows 11, i5‑11300H, 16 GB RAM)**  
   - Host for VirtualBox.  
-  - Runs VMs: Windows 11 (endpoint), Kali Linux (attacker), Ubuntu Desktop (analyst / extra endpoint).  
+  - Runs VMs: Windows 10Pro (endpoint), Kali Linux (attacker), Ubuntu Desktop (analyst / extra endpoint).  
   - Main workstation and lab documentation.
 
 - **Lenovo (i5, 8 GB RAM)**  
@@ -19,11 +19,11 @@ This environment is designed to simulate a basic SOC with endpoints, an attacker
 - [x] Created a dedicated SOC‑lab account on the laptop (local, admin, no bloatware).  
 - [x] Installed VirtualBox on Windows 11.  
 - [x] Created and installed VMs on the laptop:  
-  - Windows 11 (endpoint, will run Sysmon + Splunk UF).  
+  - Windows 10Pro (endpoint, will run Sysmon + Splunk UF).  
   - Kali Linux (attacker).  
   - Ubuntu Desktop (analyst / extra endpoint).  
 - [ ] Installed and configured Splunk on Lenovo.  
-- [ ] Connected Windows 11 VM to the SIEM (Splunk UF or Wazuh agent).  
+- [ ] Connected Windows 10Pro VM to the SIEM (Splunk UF or Wazuh agent).  
 - [ ] Connected Ubuntu Desktop VM to the SIEM.  
 - [ ] Will add a physical honeypot on a third computer and connect it to the SIEM.
 
@@ -32,7 +32,7 @@ This environment is designed to simulate a basic SOC with endpoints, an attacker
 1. On the laptop:  
    - Log in to the **SOC‑lab** account.  
    - Start VirtualBox.  
-   - Start the VMs: **Windows 11**, **Kali Linux**, and **Ubuntu Desktop**.  
+   - Start the VMs: **Windows 10Pro**, **Kali Linux**, and **Ubuntu Desktop**.  
 
 2. On Lenovo:  
    - Log in to Ubuntu Server.  
@@ -48,11 +48,11 @@ This environment is designed to simulate a basic SOC with endpoints, an attacker
 
 ## What I plan next
 
-- [ ] Install and configure **Sysmon** on the Windows 11 VM.  
-- [ ] Install **Splunk Universal Forwarder** on Windows 11 and Ubuntu Desktop.  
+- [ ] Install and configure **Sysmon** on the Windows 10Pro VM.  
+- [ ] Install **Splunk Universal Forwarder** on Windows 10Pro and Ubuntu Desktop.  
 - [ ] Write basic detection rules and dashboards in Splunk for:  
   - SSH brute‑force attempts.  
   - RDP logins.  
   - Network scans from Kali.  
 - [ ] Add a **physical honeypot** (third computer) and connect it to the SIEM.  
-- [ ] Document TryHackMe SOC Level 1 exercises in `/docs/thm-soc/` and link them to real lab events.
+

@@ -1,37 +1,24 @@
 
-#Lab Report – Nmap, Wireshark and Windows Ports in a Virtualized Lab
-##Environment
-Hypervisor: virtualized lab with three VMs
+# Lab Report – Nmap, Wireshark and Windows Ports in a Virtualized Lab
+## Environment
+ - Hypervisor: virtualized lab with two VMs
+    - Ubuntu Linux (sniffer, running Wireshark)
+    - Windows (target)  
+ - Network: all two machines in the same host-only / internal network
+    - Example IPs:
+      - Ubuntu: 192.168.56.10
+      - Windows: 192.168.56.12
+        
+## Goal
+The goal of this lab was to understand why, when scanning the Windows VM from Ubuntu using nmap, only the outbound traffic from the scanner was visible in Wireshark, and why responses from Windows were often not seen. The lab also aimed to clarify the difference between:
+  - A port listening locally on Windows (visible in netstat / Get-NetTCPConnection), and
+  - A port being reachable and clearly “open” from another host, as seen by nmap and Wireshark.
 
-Kali Linux (attacker / scanner)
-
-Ubuntu Linux (sniffer, running Wireshark)
-
-Windows (target)
-
-Network: all three machines in the same host-only / internal network
-
-Example IPs:
-
-Ubuntu: 192.168.56.10
-
-Windows: 192.168.56.12
-
-Goal
-The goal of this lab was to understand why, when scanning the Windows VM from Kali/Ubuntu using nmap, only the outbound traffic from the scanner was visible in Wireshark, and why responses from Windows were often not seen. The lab also aimed to clarify the difference between:
-
-A port listening locally on Windows (visible in netstat / Get-NetTCPConnection), and
-
-A port being reachable and clearly “open” from another host, as seen by nmap and Wireshark.
-
-Initial Observations
-ICMP (ping)
-
-Windows responded to ICMP echo requests when pinged from other machines.
-
-This confirmed basic IP connectivity and that the Windows host was reachable.
-
-Nmap scans
+## Initial Observations
+ 1. **ICMP (ping)**
+  - Windows responded to ICMP echo requests when pinged from other machines.
+  - This confirmed basic IP connectivity and that the Windows host was reachable.
+ 2. Nmap scans
 
 When scanning Windows from Kali/Ubuntu, Wireshark running on Ubuntu initially showed only packets coming from the scanner (e.g., SYN), but not necessarily responses from Windows for some ports.
 

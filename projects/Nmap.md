@@ -67,8 +67,9 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" `
 Get-NetFirewallProfile | Format-Table Name, Enabled
 
 Get-NetFirewallProfile -Profile Private | Format-List *
-This shows which profiles (Domain/Private/Public) are enabled and their default policies.
 ```
+This shows which profiles (Domain/Private/Public) are enabled and their default policies.
+
 ### 4.3. Checking ICMP (Echo Request) rules
 ```powershell
 Get-NetFirewallRule -DisplayGroup "File and Printer Sharing" |

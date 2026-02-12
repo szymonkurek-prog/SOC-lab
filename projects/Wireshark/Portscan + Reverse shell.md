@@ -111,58 +111,39 @@ Windows connects to Kali, and the cmd.exe process is attached to that network ch
     - ```tcp.port == 4444```.
 
 **Reverse shell analysis in Wireshark**
-After sending a few commands from Kali (whoami, dir), the connection was suddenly dropped because Windows Defender detected a threat and killed the reverse shell process.
+  1. After sending a few commands from Kali (whoami, dir), the connection was suddenly dropped because Windows Defender detected a threat and killed the reverse shell process.
 
-Follow TCP Stream
+  2. **Follow TCP Stream**
+    - Select a data packet (e.g. PSH, ACK) on port 4444.
+    - Follow → TCP Stream.
+    - Visible elements:
+      - One direction: commands sent from Kali (whoami, dir).
+      - Other direction: responses from Windows (username, directory listing).
 
-Select a data packet (e.g. PSH, ACK) on port 4444.
+  3. **SOC interpretation**
+     - A TCP stream on an unusual port that contains system commands and their output is a strong indicator of a remote console.
+     - Windows Defender simultaneously raised an alert and terminated the process – typical AV/EDR behavior in response to a reverse shell.
+       
+**Key SOC takeaways**
+  1. Promiscuous mode on the Ubuntu interface
+     - Enables observation of traffic between other hosts in the same network segment (Kali ↔ Windows).
+     - This is fundamental for network sensors and IDS/IPS.
 
-Follow → TCP Stream.
+  2. nmap scan pattern in Wireshark
+     - Single source IP, many destination ports.
+     - Lots of `SYN` packets in a short period.
+     - `SYN/ACK` responses (open ports) and `RST/ACK` responses (closed ports).
 
-Visible elements:
+  3. Reverse shell pattern in Wireshark
+     - Long‑lived TCP connection on a non‑standard port.
+     - Stream contains system commands and their output (when not encrypted).
+     - Correlating this with an AV/EDR alert (e.g. Windows Defender) strongly supports the incident hypothesis.
 
-One direction: commands sent from Kali (whoami, dir).
+  4. Thinking like a SOC analyst
+     - Network visibility (Wireshark) + endpoint logs/alerts (Defender) = a much clearer picture of what happened.
+     - Unusual port + console‑like commands + AV alert is a strong signal of a reverse shell / remote control activity.
 
-Other direction: responses from Windows (username, directory listing).
-
-SOC interpretation
-
-A TCP stream on an unusual port that contains system commands and their output is a strong indicator of a remote console.
-
-Windows Defender simultaneously raised an alert and terminated the process – typical AV/EDR behavior in response to a reverse shell.
-
-Key SOC takeaways
-Promiscuous mode on the Ubuntu interface
-
-Enables observation of traffic between other hosts in the same network segment (Kali ↔ Windows).
-
-This is fundamental for network sensors and IDS/IPS.
-
-nmap scan pattern in Wireshark
-
-Single source IP, many destination ports.
-
-Lots of SYN packets in a short period.
-
-SYN/ACK responses (open ports) and RST/ACK responses (closed ports).
-
-Reverse shell pattern in Wireshark
-
-Long‑lived TCP connection on a non‑standard port.
-
-Stream contains system commands and their output (when not encrypted).
-
-Correlating this with an AV/EDR alert (e.g. Windows Defender) strongly supports the incident hypothesis.
-
-Thinking like a SOC analyst
-
-Network visibility (Wireshark) + endpoint logs/alerts (Defender) = a much clearer picture of what happened.
-
-Unusual port + console‑like commands + AV alert is a strong signal of a reverse shell / remote control activity.
-
-Possible lab extensions
-Try a reverse shell on a different port and compare the artifacts.
-
-Add a SIEM (e.g. Splunk) and forward Windows logs plus Wireshark‑derived metadata there.
-
-Write a response checklist for a detected reverse shell: artifacts to collect (IP, port, user, process path, file hash, timestamp, hostname).
+**Possible lab extensions**
+- Try a reverse shell on a different port and compare the artifacts.
+- Add a SIEM (e.g. Splunk) and forward Windows logs plus Wireshark‑derived metadata there.
+- Write a response checklist for a detected reverse shell: artifacts to collect (IP, port, user, process path, file hash, timestamp, hostname).

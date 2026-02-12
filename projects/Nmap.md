@@ -140,9 +140,9 @@ After enabling ICMPv4 in the Windows firewall, ```-sn``` ```-PE``` was sufficien
 
 - ```-PS``` and ```-PA``` serve as backup / alternative methods when:
 
--- ICMP is disabled or filtered,
+  - ICMP is disabled or filtered,
 
--- you want to observe how a firewall handles SYN vs ACK packets.
+  - you want to observe how a firewall handles SYN vs ACK packets.
 
 ---
 

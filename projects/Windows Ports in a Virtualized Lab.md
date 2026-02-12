@@ -20,8 +20,8 @@ The goal of this lab was to understand why, when scanning the Windows VM from Ub
 ## Initial Observations
 
 1. **ICMP (ping)**
- -- Windows responded to ICMP echo requests when pinged from other machines.
- -- This confirmed basic IP connectivity and that the Windows host was reachable.
+- Windows responded to ICMP echo requests when pinged from other machines.
+- This confirmed basic IP connectivity and that the Windows host was reachable.
     
 2. **Nmap scans**
  - When scanning Windows from Kali/Ubuntu, Wireshark running on Ubuntu initially showed only packets coming from the scanner (e.g., SYN), but not necessarily responses from Windows for some ports.

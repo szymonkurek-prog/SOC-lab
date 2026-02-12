@@ -123,8 +123,8 @@ Windows connects to Kali, and the cmd.exe process is attached to that network ch
   3. **SOC interpretation**
      - A TCP stream on an unusual port that contains system commands and their output is a strong indicator of a remote console.
      - Windows Defender simultaneously raised an alert and terminated the process – typical AV/EDR behavior in response to a reverse shell.
-       
-**Key SOC takeaways**
+
+  ## Key SOC takeaways
   1. Promiscuous mode on the Ubuntu interface
      - Enables observation of traffic between other hosts in the same network segment (Kali ↔ Windows).
      - This is fundamental for network sensors and IDS/IPS.

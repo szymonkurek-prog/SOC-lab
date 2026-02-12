@@ -138,34 +138,34 @@ Method summary:
 ### 5.3. Conclusions from host discovery tests
 After enabling ICMPv4 in the Windows firewall, ```-sn``` ```-PE``` was sufficient as the default host discovery method in this lab.
 
-- ```-PS``` and ```-PA``` serve as backup / alternative methods when:
+```-PS``` and ```-PA``` serve as backup / alternative methods when:
 
-  - ICMP is disabled or filtered,
+- ICMP is disabled or filtered,
 
-  - you want to observe how a firewall handles SYN vs ACK packets.
+- you want to observe how a firewall handles SYN vs ACK packets.
 
 ---
 
 ## 6. Host discovery vs port scan
 Host discovery (-sn, -PE, -PS, -PA, etc.):
 
-Answers the question: “Is this host alive?”
+- Answers the question: “Is this host alive?”
 
-Uses a small number of probes (ICMP or TCP) to determine whether a host responds at all.
+- Uses a small number of probes (ICMP or TCP) to determine whether a host responds at all.
 
-Does not perform a full port scan.
+- Does not perform a full port scan.
 
-Port scan (-sS, -sT, -sU, etc.):
+- Port scan (-sS, -sT, -sU, etc.):
 
 Answers the question: “Which ports are open/closed/filtered on this host?”
 
-Systematically tests multiple ports and reports their state.
+- Systematically tests multiple ports and reports their state.
 
 Typical nmap workflow:
 
-Host discovery → get a list of live IP addresses.
+- Host discovery → get a list of live IP addresses.
 
-Port scan → scan selected hosts for open ports and services.
+- Port scan → scan selected hosts for open ports and services.
 
 ---
 

@@ -32,33 +32,26 @@ The goal of this lab was to understand why, when scanning the Windows VM from Ub
    - Because the virtual network switch behaves like a real switch, the sniffer on a third VM may not see all traffic between two other endpoints unless the switch forwards or mirrors it.
    - For correctly configured interfaces, Ubuntu could still see traffic for some flows (e.g., for the HTTP test on port 8080 described later).
   
-4. **Inspecting Windows Ports**
-   - On the Windows VM, the following commands were used to inspect listening ports:
+## Inspecting Windows Ports
+On the Windows VM, the following commands were used to inspect listening ports:
    ```powershell
    Get-NetTCPConnection -State Listen
    Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -eq 5357 }
    Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -eq 139 }
    ```
-- Typical findings:
-
-Port 5357 listening on :: (IPv6 any).
-
-Port 139 listening on 192.168.56.12 (host-only interface).
+Typical findings:
+   - Port 5357 listening on :: (IPv6 any).
+   - Port 139 listening on 192.168.56.12 (host-only interface).
 
 This confirmed that Windows had local listeners on these ports. However, that alone does not guarantee that the ports are reachable from other hosts or that Windows will respond to arbitrary scans from the lab network.
 
-Key Concept: Listening vs. Reachable
+## Key Concept: Listening vs. Reachable
 A critical takeaway from the lab:
-
-LISTENING in netstat / Get-NetTCPConnection only tells us that some process has bound to that port on some local IP address.
-
-For a remote host to see the port as open, all of the following must be true:
-
-The service is bound to an IP address that is reachable from the remote host (e.g., not only 127.0.0.1).
-
-The firewall and network policies allow incoming connections from that remote IP and network profile.
-
-The OS actually responds to incoming SYN packets (with SYN,ACK or RST) instead of silently dropping them.
+- LISTENING in netstat / Get-NetTCPConnection only tells us that some process has bound to that port on some local IP address.
+- For a remote host to see the port as open, all of the following must be true:
+   1. The service is bound to an IP address that is reachable from the remote host (e.g., not only 127.0.0.1).
+   2. The firewall and network policies allow incoming connections from that remote IP and network profile.
+   3. The OS actually responds to incoming SYN packets (with SYN,ACK or RST) instead of silently dropping them.
 
 In this lab, this distinction was particularly important for ports like 139, where local listening did not imply a clear response to nmap from another VM.
 

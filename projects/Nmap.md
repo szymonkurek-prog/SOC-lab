@@ -129,20 +129,20 @@ All three methods detected the host as up.
 
 Method summary:
 
--```PE``` – ICMP Echo Request (similar to classic ping).
+- ```-PE``` – ICMP Echo Request (similar to classic ping).
 
--```PS``` – sends TCP SYN; a SYN/ACK or RST response indicates the host is alive.
+- ```-PS``` – sends TCP SYN; a SYN/ACK or RST response indicates the host is alive.
 
--```PA```– sends TCP ACK; an RST response indicates the host is alive (often useful when SYN packets are filtered more strictly).
+- ```-PA```– sends TCP ACK; an RST response indicates the host is alive (often useful when SYN packets are filtered more strictly).
 
 ### 5.3. Conclusions from host discovery tests
-After enabling ICMPv4 in the Windows firewall, -sn -PE was sufficient as the default host discovery method in this lab.
+After enabling ICMPv4 in the Windows firewall, ```-sn``` ```-PE``` was sufficient as the default host discovery method in this lab.
 
--PS and -PA serve as backup / alternative methods when:
+- ```-PS``` and ```-PA``` serve as backup / alternative methods when:
 
-ICMP is disabled or filtered,
+-- ICMP is disabled or filtered,
 
-you want to observe how a firewall handles SYN vs ACK packets.
+-- you want to observe how a firewall handles SYN vs ACK packets.
 
 ---
 

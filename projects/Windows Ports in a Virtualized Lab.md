@@ -24,7 +24,7 @@ The goal of this lab was to understand why, when scanning the Windows VM from Ub
    - This confirmed basic IP connectivity and that the Windows host was reachable.
     
 2. **Nmap scans**
- - When scanning Windows from Kali/Ubuntu, Wireshark running on Ubuntu initially showed only packets coming from the scanner (e.g., SYN), but not necessarily responses from Windows for some ports.
+  - When scanning Windows from Kali/Ubuntu, Wireshark running on Ubuntu initially showed only packets coming from the scanner (e.g., SYN), but not necessarily responses from Windows for some ports.
  - For some ports, especially “sensitive” ones like TCP 139 (NetBIOS-SSN), nmap reported the port as filtered/host down even though netstat on Windows showed it as LISTENING.
     
 3. **Wireshark capture location**

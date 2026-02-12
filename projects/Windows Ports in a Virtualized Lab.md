@@ -24,21 +24,21 @@ The goal of this lab was to understand why, when scanning the Windows VM from Ub
    - This confirmed basic IP connectivity and that the Windows host was reachable.
     
 2. **Nmap scans**
-  - When scanning Windows from Kali/Ubuntu, Wireshark running on Ubuntu initially showed only packets coming from the scanner (e.g., SYN), but not necessarily responses from Windows for some ports.
- - For some ports, especially “sensitive” ones like TCP 139 (NetBIOS-SSN), nmap reported the port as filtered/host down even though netstat on Windows showed it as LISTENING.
+   - When scanning Windows from Kali/Ubuntu, Wireshark running on Ubuntu initially showed only packets coming from the scanner (e.g., SYN), but not necessarily responses from Windows for some ports.
+   - For some ports, especially “sensitive” ones like TCP 139 (NetBIOS-SSN), nmap reported the port as filtered/host down even though netstat on Windows showed it as LISTENING.
     
 3. **Wireshark capture location**
-- Wireshark was capturing on the Ubuntu VM, not on Windows.
-- Because the virtual network switch behaves like a real switch, the sniffer on a third VM may not see all traffic between two other endpoints unless the switch forwards or mirrors it.
-- For correctly configured interfaces, Ubuntu could still see traffic for some flows (e.g., for the HTTP test on port 8080 described later).
+   - Wireshark was capturing on the Ubuntu VM, not on Windows.
+   - Because the virtual network switch behaves like a real switch, the sniffer on a third VM may not see all traffic between two other endpoints unless the switch forwards or mirrors it.
+   - For correctly configured interfaces, Ubuntu could still see traffic for some flows (e.g., for the HTTP test on port 8080 described later).
   
 4. **Inspecting Windows Ports**
-- On the Windows VM, the following commands were used to inspect listening ports:
-```powershell
-Get-NetTCPConnection -State Listen
-Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -eq 5357 }
-Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -eq 139 }
-```
+   - On the Windows VM, the following commands were used to inspect listening ports:
+   ```powershell
+   Get-NetTCPConnection -State Listen
+   Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -eq 5357 }
+   Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -eq 139 }
+   ```
 - Typical findings:
 
 Port 5357 listening on :: (IPv6 any).

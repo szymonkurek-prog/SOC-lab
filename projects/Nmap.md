@@ -103,34 +103,37 @@ ping ```192.168.56.12``` worked in both directions.
 ### 5.1. Role of sudo
 sudo runs commands with administrator (root) privileges. For nmap this is important because it allows:
 
-sending raw ICMP packets,
+- sending raw ICMP packets,
 
-sending custom TCP SYN/ACK probes,
+- sending custom TCP SYN/ACK probes,
 
-using full host discovery capabilities.
+- using full host discovery capabilities.
 
 ### 5.2. Commands tested (single host – Windows)
 ICMP Echo ping:
 
-bash
-sudo nmap -sn -PE <IP_Windows>
+```bash
+sudo nmap -sn -PE 192.168.56.12
+```
 TCP SYN ping on ports 80 and 443:
 
-bash
-sudo nmap -sn -PS80,443 <IP_Windows>
+```bash
+sudo nmap -sn -PS80,443 192.168.56.12
+```
 TCP ACK ping on ports 80 and 443:
 
-bash
-sudo nmap -sn -PA80,443 <IP_Windows>
+```bash
+sudo nmap -sn -PA80,443 192.168.56.12
+```
 All three methods detected the host as up.
 
 Method summary:
 
--PE – ICMP Echo Request (similar to classic ping).
+-```PE``` – ICMP Echo Request (similar to classic ping).
 
--PS – sends TCP SYN; a SYN/ACK or RST response indicates the host is alive.
+-```PS``` – sends TCP SYN; a SYN/ACK or RST response indicates the host is alive.
 
--PA – sends TCP ACK; an RST response indicates the host is alive (often useful when SYN packets are filtered more strictly).
+-```PA```– sends TCP ACK; an RST response indicates the host is alive (often useful when SYN packets are filtered more strictly).
 
 ### 5.3. Conclusions from host discovery tests
 After enabling ICMPv4 in the Windows firewall, -sn -PE was sufficient as the default host discovery method in this lab.

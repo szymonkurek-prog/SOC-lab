@@ -125,21 +125,21 @@ Windows connects to Kali, and the cmd.exe process is attached to that network ch
      - Windows Defender simultaneously raised an alert and terminated the process – typical AV/EDR behavior in response to a reverse shell.
 
   ## Key SOC takeaways
-  1. Promiscuous mode on the Ubuntu interface
+  1. **Promiscuous mode on the Ubuntu interface**
      - Enables observation of traffic between other hosts in the same network segment (Kali ↔ Windows).
      - This is fundamental for network sensors and IDS/IPS.
 
-  2. nmap scan pattern in Wireshark
+  2. **nmap scan pattern in Wireshark**
      - Single source IP, many destination ports.
      - Lots of `SYN` packets in a short period.
      - `SYN/ACK` responses (open ports) and `RST/ACK` responses (closed ports).
 
-  3. Reverse shell pattern in Wireshark
+  3. **Reverse shell pattern in Wireshark**
      - Long‑lived TCP connection on a non‑standard port.
      - Stream contains system commands and their output (when not encrypted).
      - Correlating this with an AV/EDR alert (e.g. Windows Defender) strongly supports the incident hypothesis.
 
-  4. Thinking like a SOC analyst
+  4. **Thinking like a SOC analyst**
      - Network visibility (Wireshark) + endpoint logs/alerts (Defender) = a much clearer picture of what happened.
      - Unusual port + console‑like commands + AV alert is a strong signal of a reverse shell / remote control activity.
 

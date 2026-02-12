@@ -155,9 +155,9 @@ Host discovery (-sn, -PE, -PS, -PA, etc.):
 
 - Does not perform a full port scan.
 
-- Port scan (-sS, -sT, -sU, etc.):
+Port scan (-sS, -sT, -sU, etc.):
 
-Answers the question: “Which ports are open/closed/filtered on this host?”
+- Answers the question: “Which ports are open/closed/filtered on this host?”
 
 - Systematically tests multiple ports and reports their state.
 
